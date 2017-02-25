@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "psmonSearch", "psmonSearch\psmonSearch.csproj", "{5C5B81C3-1E41-4A35-B576-A98415B9CA8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "common\common.csproj", "{E448E564-815A-4BEE-A8FE-FA03911852BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C5B81C3-1E41-4A35-B576-A98415B9CA8C}.Debug|x86.ActiveCfg = Debug|x86
+		{5C5B81C3-1E41-4A35-B576-A98415B9CA8C}.Debug|x86.Build.0 = Debug|x86
+		{5C5B81C3-1E41-4A35-B576-A98415B9CA8C}.Release|x86.ActiveCfg = Release|x86
+		{5C5B81C3-1E41-4A35-B576-A98415B9CA8C}.Release|x86.Build.0 = Release|x86
+		{E448E564-815A-4BEE-A8FE-FA03911852BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E448E564-815A-4BEE-A8FE-FA03911852BE}.Debug|x86.Build.0 = Debug|Any CPU
+		{E448E564-815A-4BEE-A8FE-FA03911852BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{E448E564-815A-4BEE-A8FE-FA03911852BE}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
