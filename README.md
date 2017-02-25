@@ -12,10 +12,11 @@
 * 이기종 통신: .net<->.java ( Atmosphere)
 
 ## JavaWordParserService ( 형태소 분석기 )
-*역활:.net에 쓸만한 형태소 분석기가 없어서 Java 버젼으로 분석기 서비스 작성
-*프레임워크: PlayFrameWork ( [Play다운로드](https://downloads.typesafe.com/play/2.2.4/play-2.2.4.zip) https://downloads.typesafe.com/play/2.2.4/play-2.2.4.zip )
-*빌드 : play build
-*실행 : play run
+
+* 역활:.net에 쓸만한 형태소 분석기가 없어서 Java 버젼으로 분석기 서비스 작성
+* 프레임워크: PlayFrameWork ( [Play다운로드](https://downloads.typesafe.com/play/2.2.4/play-2.2.4.zip) https://downloads.typesafe.com/play/2.2.4/play-2.2.4.zip )
+* 빌드 : play build
+* 실행 : play run
 
 ## SearchAPI ( 검색 API 제공)
 
