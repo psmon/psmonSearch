@@ -38,8 +38,11 @@
    -실행및 디버깅 확인
 
 * 참고 신규 프로젝트 생성
-   -activator new my-first-app3 play-scala
+   -(Play Docu)[https://www.playframework.com/documentation/2.5.x/PlayConsole]
 
+## 루씬.net 기본 사용법
+
+* (기본 인덱싱및 검색)[https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8]
 
 
 
