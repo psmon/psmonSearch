@@ -21,8 +21,7 @@
 
 의존 라이브러리 다운로드및 설정
 
-(Activator download)[https://downloads.typesafe.com/typesafe-activator/1.3.12/typesafe-activator-1.3.12.zip]
-
+* [Activator download](https://downloads.typesafe.com/typesafe-activator/1.3.12/typesafe-activator-1.3.12.zip)
 * JDK 1.8 설치
 * IteliJ 설치
 * PATH Activator\Bin  설정 (Activator 압축푼 디렉토리/BIN)
@@ -43,7 +42,7 @@
 
 ## 루씬.net 기본 사용법
 
-(기본 인덱싱및 검색)[https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8]
+* [기본 인덱싱및 검색](https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8)
 
 
 
