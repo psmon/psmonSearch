@@ -15,6 +15,8 @@ namespace psmonSearch
 	{
 		public static void Main(string[] args)
 		{
+            TestLib.test1();
+
             ConsoleKeyInfo cki;
             Console.CancelKeyPress += new ConsoleCancelEventHandler(myHandler);
 
