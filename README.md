@@ -20,7 +20,7 @@
 ## .net 프로젝트에 사용될 컨셉 (VS 2015)
 
 * [루씬 인덱싱/검색](https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8)
-* [서버간 이벤트버스 서비스]https://github.com/psmon/TopicEventBus
+* [서버간 PUB/SUB 모델](https://github.com/psmon/TopicEventBus)
 * [기본 리모트 통신](https://github.com/psmon/AkkaNetTest)
 
 
