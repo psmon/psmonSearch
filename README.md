@@ -1,6 +1,6 @@
 # 피스몬 서치 초안
 
-![초안](http://psmon.x-y.net/doc/img/basiccomponent.PNG)
+![초안1](http://psmon.x-y.net/doc/img/basiccomponent.PNG)
 
 이 프로젝트는 학습용으로 진행중입니다.
 
