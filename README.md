@@ -32,7 +32,7 @@
 
 ## playWordParser 설정 (JAVA 1.8 IDEA Community)
 
-PlayFramework 2.5 로 구성되었으며,  FullStack 웹개발이 가능하여
+PlayFramework 2.5 로 구성되었으며,  FullStack-[Spec확인](https://www.playframework.com/documentation/2.5.x/Tutorials) 웹개발이 가능하여
 
 선택하였습니다. 자바진영의 형태소 분석기 라이브러리참조후, 웹소켓으로 인터페이스를
 
@@ -61,8 +61,6 @@ PlayFramework 2.5 로 구성되었으며,  FullStack 웹개발이 가능하여
    - + 버튼 , Add SBT Task , Tasks: run 입력
    - 실행및 디버깅 확인
 
-* PlayFramewokDocument
-    [Playframework More Spec](https://www.playframework.com/documentation/2.5.x/Tutorials)
 
 
 
