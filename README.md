@@ -56,7 +56,7 @@ PlayFramework 2.5 로 구성되었으며,  FullStack 웹개발이 가능하여
    - 실행및 디버깅 확인
 
 * 참고 신규 프로젝트 생성
-    [Play Docu](https://www.playframework.com/documentation/2.5.x/PlayConsole)
+    [Playframework More Spec](https://www.playframework.com/documentation/2.5.x/Tutorials)
 
 
 
