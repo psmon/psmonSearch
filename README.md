@@ -17,12 +17,14 @@
 
 이기종 통신: .net<->.java ( WebSocket)
 
+## .net 프로젝트에 사용될 컨셉 (VS 2015)
 
-## 루씬.net 기본 사용법
+* [루씬 인덱싱/검색](https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8)
+* [서버간 PUB/SUB 모델](https://github.com/psmon/TopicEventBus)
+* [기본 리모트 통신](https://github.com/psmon/AkkaNetTest)
 
-* [기본 인덱싱및 검색](https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8)
 
-## playWordParser 설정 (JAVA)
+## playWordParser 설정 (JAVA 1.8 IDEA Community)
 
 PlayFramework 2.5 로 구성되었으며,  FullStack 웹개발이 가능하여
 
