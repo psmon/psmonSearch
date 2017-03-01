@@ -1,13 +1,8 @@
 ﻿using System;
-using Akka;
-using Akka.Actor;
-using Akka.Event;
 using Akka.Configuration;
-
-using Akka.Serialization;
+using System.Configuration;
 
 using common.Actors;
-using WebSocketSharp;
 
 namespace psmonSearch
 {
@@ -19,11 +14,17 @@ namespace psmonSearch
 
             ConsoleKeyInfo cki;
             Console.CancelKeyPress += new ConsoleCancelEventHandler(myHandler);
-
+            var url = "http://+:80";
             var config = ConfigurationFactory.ParseString(@"
             akka {
                 actor {
-                    provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""                    
+                    provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
+                    serializers {
+                          wire = ""Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion""
+                    }
+                    serialization-bindings {
+                    ""System.Object"" = wire
+                    }
                 }
                 remote {
                     helios.tcp {
@@ -34,49 +35,25 @@ namespace psmonSearch
             }
             ");
 
-            using (ActorSystem system = ActorSystem.Create("SearchMain", config))
-            {                
-                var actor = system.ActorOf<SimpleActor>("greeter");
-                
-                var remoteActor = system.ActorSelection("akka.tcp://WordParserSystem@192.168.0.5:9005/user/parserActor");
+            
+            //var url = ConfigurationManager.AppSettings.Get("ServiceURL");
+            AppService.StartWebService(url);
+            AppService.StartAkkaSystem("SearchMain", config);
+            AppService.CreateActor<SimpleActor>("SearchMain", "test");
+            
 
-                var ws = new WebSocket("ws://192.168.0.5:9001/wsapi");
-               
+            while (true)
+            {
+                cki = Console.ReadKey(true);
+                Console.WriteLine("  Key pressed: {0}\n", cki.Key);
 
-                ws.Connect();
-                
-
-                //var actorRef = remoteActor.ResolveOne(TimeSpan.FromSeconds(5)).Result;
-
-                //string id = Serialization.SerializedActorPath(actorRef);
-
-                // Then just serialize the identifier however you like
-
-                // Deserialize
-                // (beneath fromBinary)
-
-                //IActorRef deserializedActorRef = system.Provider.ResolveActorRef(id);
-
-
-                while (true)
-                {                   
-                    cki = Console.ReadKey(true);                    
-                    Console.WriteLine("  Key pressed: {0}\n", cki.Key);
-
-                    byte[] test = new byte[6];
-                    test[0] = 1;
-
-                    //remoteActor.Tell(test);
-                    ws.Send(@" {""test"":1} ");
-                    
-
-                    if (cki.Key == ConsoleKey.X) break;
-                }
-            }
+                byte[] test = new byte[6];
+                test[0] = 1;
 
 
 
-            Console.WriteLine("Hello World!");
+                if (cki.Key == ConsoleKey.X) break;
+            }            
 		}
 
         protected static void myHandler(object sender, ConsoleCancelEventArgs args)
