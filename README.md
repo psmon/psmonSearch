@@ -24,6 +24,11 @@
 * [서버간 PUB/SUB 모델](https://github.com/psmon/TopicEventBus)
 * [기본 리모트 통신](https://github.com/psmon/AkkaNetTest)
 
+## java 프로젝트에 사용될 컨셉
+
+* [WebSocket for Play25](https://github.com/psmon/psmonSearch/commit/8a885c1de1820192cb56c32cc34b41e18f03eefc#diff-911a0f2c3e264e6dd7b2e110349983d5)
+* [형태소 분석기-준비중](http://psmon.x-y.net)
+
 
 ## playWordParser 설정 (JAVA 1.8 IDEA Community)
 
