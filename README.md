@@ -1,5 +1,6 @@
 # 피스몬 서치 초안
-![초안](http://psmon.x-y.net/doc/img/basiccomponent.PNG)
+
+![초안1](http://psmon.x-y.net/doc/img/basiccomponent.PNG)
 
 이 프로젝트는 학습용으로 진행중입니다.
 
@@ -19,14 +20,19 @@
 
 ## .net 프로젝트에 사용될 컨셉 (VS 2015)
 
-* [루씬 인덱싱/검색](https://github.com/psmon/psmonSearch/wiki/%EB%A3%A8%EC%94%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8)
+* [루씬 인덱싱/검색](https://github.com/psmon/psmonSearch/blob/master/psmonSearch/TestLib.cs)
 * [서버간 PUB/SUB 모델](https://github.com/psmon/TopicEventBus)
 * [기본 리모트 통신](https://github.com/psmon/AkkaNetTest)
+
+## java 프로젝트에 사용될 컨셉
+
+* [WebSocket for Play25](https://github.com/psmon/psmonSearch/commit/8a885c1de1820192cb56c32cc34b41e18f03eefc#diff-911a0f2c3e264e6dd7b2e110349983d5)
+* [형태소 분석기-준비중](http://psmon.x-y.net)
 
 
 ## playWordParser 설정 (JAVA 1.8 IDEA Community)
 
-PlayFramework 2.5 로 구성되었으며,  FullStack 웹개발이 가능하여
+PlayFramework 2.5 로 구성되었으며,  FullStack-[Spec확인](https://www.playframework.com/documentation/2.5.x/Tutorials) 웹개발이 가능하여
 
 선택하였습니다. 자바진영의 형태소 분석기 라이브러리참조후, 웹소켓으로 인터페이스를
 
@@ -55,8 +61,6 @@ PlayFramework 2.5 로 구성되었으며,  FullStack 웹개발이 가능하여
    - + 버튼 , Add SBT Task , Tasks: run 입력
    - 실행및 디버깅 확인
 
-* PlayFramewokDocument
-    [Playframework More Spec](https://www.playframework.com/documentation/2.5.x/Tutorials)
 
 
 
