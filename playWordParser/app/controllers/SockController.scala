@@ -23,7 +23,7 @@ class SockController @Inject() (implicit system: ActorSystem, materializer: Mate
   //implicit val messageFlowTransformer = MessageFlowTransformer.jsonMessageFlowTransformer[InEvent, OutEvent]
 
   def socket = WebSocket.accept[String, String] { request =>
-    ActorFlow.actorRef(out => MyWebSocketActor.props(out))
+    ActorFlow.actorRef(out => MyWebSocketActor.props(out,system))
   }
 
 }
