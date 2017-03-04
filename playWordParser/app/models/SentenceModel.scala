@@ -8,7 +8,7 @@ case class SentenceModel( info:String )
 
 case class SentenceSubListModel(name: String , sentens:Seq[SentenceModel] )
 
-case class SentenceMainListModel( dataList:Seq[SentenceSubListModel] )
+case class SentenceMainListModel( pid:String,seqID:Int , dataList:Seq[SentenceSubListModel] )
 
 
 

@@ -14,8 +14,18 @@ object MyWebSocketActor {
 class MyWebSocketActor(out: ActorRef, system:ActorSystem) extends Actor {
   def receive = {
     case msg: String =>
-      system.actorSelection("/user/wordParserActor") ! AskParser(msg,1)
-      out ! ("I received your message: " + msg)
+      val json:JsValue = Json.parse(msg)
+      val pid = (json \ "pid").asOpt[String]
+
+      pid match {
+        case Some("WordParserInfo")  =>
+          val text:String = (json \ "text").as[String]
+          val reqID:Int = (json \ "reqID").as[Int]
+          system.actorSelection("/user/wordParserActor") ! AskParser(text,1,reqID)
+        case None =>
+          out ! ("None")
+      }
+
     case msg: JsValue =>
       out ! msg.toString()
     case msg: SentenceMainListModel =>

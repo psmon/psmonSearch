@@ -11,13 +11,13 @@ import java.util.List
 
 import com.fasterxml.jackson.annotation.JsonValue
 import models._
-import org.snu.ids.ha.ma.MExpression
-import org.snu.ids.ha.ma.MorphemeAnalyzer
-import org.snu.ids.ha.ma.Sentence
+import org.snu.ids.ha.ma.{Eojeol, MExpression, MorphemeAnalyzer, Sentence}
 import org.snu.ids.ha.index.Keyword
 import org.snu.ids.ha.index.KeywordExtractor
 import org.snu.ids.ha.index.KeywordList
+
 import scala.collection.JavaConverters._
+import scala.collection.mutable.ListBuffer
 
 
 
@@ -25,7 +25,7 @@ object WordParserAcotor {
   def props = Props[WordParserAcotor]
   case class Greeting(from: String)
   case object Goodbye
-  case class AskParser(words:String,parserType:Int)
+  case class AskParser(words:String,parserType:Int,seqID: Int)
 }
 
 class WordParserAcotor extends Actor with ActorLogging{
@@ -55,7 +55,7 @@ class WordParserAcotor extends Actor with ActorLogging{
     def receive = {
       case Greeting(greeter) => log.info(s"I was greeted by $greeter.")
       case Goodbye           => log.info("Someone said goodbye to me.")
-      case AskParser(words,parserType) =>
+      case AskParser(words,parserType,seqID) =>
         if(parserType==1){
           //val ma = new MorphemeAnalyzer
           var ret = ma.analyze(words)
@@ -65,30 +65,29 @@ class WordParserAcotor extends Actor with ActorLogging{
           ret = ma.leaveJustBest(ret)
           // divide result to setences
           val stl:List[Sentence] = ma.divideToSentences(ret)
-          // print the result
+          var sentenceSubList:ListBuffer[SentenceSubListModel] = ListBuffer[SentenceSubListModel]()
 
-          var sentenceSubList:Seq[SentenceSubListModel] = Seq[SentenceSubListModel]()
           log.debug("==StlSize " + stl.size().toString())
 
           for( stInfo <- stl.asScala ) {
             log.debug(stInfo.getSentence)
             val mainWord: String = stInfo.getSentence
-            var sentenceModelList: Seq[SentenceModel] = Seq[SentenceModel]()
-            var j = 0
-            while (j < stInfo.size()) {
-              var item = stInfo.get(j)
-              var sentenceModel = SentenceModel(item.toString())
-              sentenceModelList = sentenceModelList :+sentenceModel
-              log.debug(item.toString())
-              j += 1
+            //var sentenceModelList: Seq[SentenceModel] = Seq[SentenceModel]()
+            var sentenceModelList: ListBuffer[SentenceModel] = ListBuffer[SentenceModel]()
+
+            val subInfo = stInfo.listIterator();
+            for(subItem <- subInfo.asScala ){
+              log.debug("==SubInfo " + subItem )
+              var sentenceModel = SentenceModel(subItem.toString())
+              //sentenceModelList = sentenceModelList :+sentenceModel
+              sentenceModelList+=sentenceModel;
+              log.debug(subItem.toString())
             }
-
             var sentencSubListModel = SentenceSubListModel(mainWord, sentenceModelList)
-            sentenceSubList = sentenceSubList :+ sentencSubListModel
-
+            sentenceSubList+=sentencSubListModel
 
           }//End For
-          val wordResult = SentenceMainListModel(sentenceSubList)
+          val wordResult = SentenceMainListModel( "WordParserInfo", seqID ,sentenceSubList)
           val jsonData = Json.toJson(wordResult)
           sender ! jsonData
 
