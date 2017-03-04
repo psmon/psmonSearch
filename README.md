@@ -32,11 +32,11 @@
 
 ## playWordParser 설정 (JAVA 1.8 IDEA Community)
 
-PlayFramework 2.5 로 구성되었으며,  FullStack-[Spec확인](https://www.playframework.com/documentation/2.5.x/Tutorials) 웹개발이 가능하여
+C# 라이브러리에, 만족할만한 형태소 분석기 라이브러리를 찾지못해 JAVA진영의 라이브러리(꼬꼬마) 사용하였으며
 
-선택하였습니다. 자바진영의 형태소 분석기 라이브러리참조후, 웹소켓으로 인터페이스를
+PlayFramework 는, FullStack-[Spec확인](https://www.playframework.com/documentation/2.5.x/Tutorials) 웹개발이 가능하여
 
-개방예정입니다. 개발환경 초기셋팅이 약간 복잡하여 정리합니다.  
+선택하였습니다.  C#<->.net 고성능 이기종간의 통신을위해 웹소켓 베이스 인터페이스로 구현예정입니다. 
 
 
 ### 의존 라이브러리 다운로드및 설정
