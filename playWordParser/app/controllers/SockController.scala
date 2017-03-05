@@ -26,4 +26,8 @@ class SockController @Inject() (implicit system: ActorSystem, materializer: Mate
     ActorFlow.actorRef(out => MyWebSocketActor.props(out,system))
   }
 
+  def testsock = Action {
+    Ok(views.html.testsock ("Your WebSock is ready."))
+  }
+
 }
