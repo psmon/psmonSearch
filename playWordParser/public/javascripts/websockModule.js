@@ -23,12 +23,7 @@ $(function () {
 
     request.onOpen = function(response) {
         console.log('ttt');
-        content.html($('<pre>', { text: 'Atmosphere connected using ' + response.transport + '\r\n' +
-            '형태소 분석기 테스트툴' + '\r\n' +
-            '채팅에 입력되는 한글문장의 형태소를 실시간 분석합니다.' + '\r\n' +
-            '사용라이브러리 : 꼬꼬마 (http://kkma.snu.ac.kr/documents/)' + '\r\n'
-        }));
-        input.removeAttr('disabled').focus();
+        addChat("","형태소 분석기 테스트툴(사용 라이브리러:꼬꼬마-http://kkma.snu.ac.kr/documents/)");
         status.text('test:');
         transport = response.transport;
     };
@@ -57,7 +52,8 @@ $(function () {
             return;
         }
         input.removeAttr('disabled').focus();
-        addMessage2("serverpush", message, 'blue');
+        //addMessage2("serverpush", message, 'blue');
+        addChat("serverpush",message)
 
     };
 
@@ -102,6 +98,37 @@ $(function () {
     function addMessage2(author, message, color) {
     content.append('<p><span style="color:' + color + '">' + author + '</span> &#64; '
         + ': ' + message + '</p>');
+    }
+
+    $( document ).ready(function() {
+        $( "#btnSend" ).click(function() {
+            sendChat();
+        });
+
+        $( "#inChatStr" ).keypress(function( event ) {
+            if (event.which == 13 && !event.shiftKey) {
+                event.preventDefault();
+                sendChat();
+            }
+        });
+    });
+
+    var sendChat = function(){
+        console.log('click');
+        var chatText = $( "#inChatStr").val();
+        addChat("ME",chatText);
+        var sendMsg = '{"text":"'+ chatText + '","pid":"WordParserInfo","reqID":0}';
+        subSocket.push( atmosphere.util.stringifyJSON( $.parseJSON(sendMsg)  ));
+
+        $("#inChatStr").val('');
+        $("#inChatStr").focus();
+    }
+
+    var addChat = function(nick,msg){
+        var txtChatArea = $( "#txtChatArea" );
+        txtChatArea.append( "<br/>" + nick + ">" + "<strong>"+msg+"</strong>" );
+        txtChatArea.scrollTop(txtChatArea.scroll().height());
+        //window.scrollTo(0,10000000);
     }
 
 });

@@ -9,8 +9,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.0.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!--link rel="stylesheet" href="/stylesheets/style.css" /-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/git/jquery.mobile-git.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script>
+
     <script src="@routes.Assets.versioned("javascripts/atmosphere.js")" type="text/javascript"></script>
     <script src="@routes.Assets.versioned("javascripts/websockModule.js")" type="text/javascript" ></script>
 
@@ -18,11 +22,10 @@
 </head>
 <body>
 <div id="header"><h3>Play 형태소 분석기 Test</h3></div>
-<div id="content"></div>
-<div>
-    <span id="status">Connecting...</span>
-    <input type="text" id="input" />
+<div id="txtChatArea" style="overflow:auto;border:8px solid yellowgreen;padding:2%">
 </div>
+</br>
+<input type="text" id="inChatStr"><button id="btnSend">Send</button>
 
 </body>
 </html>
