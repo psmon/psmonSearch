@@ -4,8 +4,6 @@
 
 이 프로젝트는 학습용으로 진행중입니다.
 
-#test tool
--형태소 WebSocket 테스트 : http://socktest.webnori.com/wstest
 
 ## 피스몬 서치 사용 플래폼 요악
 
@@ -30,7 +28,7 @@
 ## java 프로젝트에 사용될 컨셉
 
 * [WebSocket for Play25](https://github.com/psmon/psmonSearch/commit/8a885c1de1820192cb56c32cc34b41e18f03eefc#diff-911a0f2c3e264e6dd7b2e110349983d5)
-* [형태소 분석기-준비중](http://psmon.x-y.net)
+* [형태소 분석기-꼬꼬마 SocketTestTool](http://socktest.webnori.com/wstest)
 
 
 ## playWordParser 설정 (JAVA 1.8 IDEA Community)
