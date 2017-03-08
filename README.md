@@ -4,6 +4,9 @@
 
 이 프로젝트는 학습용으로 진행중입니다.
 
+#test tool
+-형태소 WebSocket 테스트 : http://socktest.webnori.com/wstest
+
 ## 피스몬 서치 사용 플래폼 요악
 
 사용 플래폼 요약
