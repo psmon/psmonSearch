@@ -19,16 +19,27 @@
 
 이기종 통신: .net<->.java ( WebSocket)
 
+## 공통 컨셉
+* Actor 모델 사용: 설계된 마이크로 모델을 어디든 배포할수 있고, 클러스터 구성할수 있다. OOP설계에서 고려하기힘든  메시지 전송에 중점을 둔 개발컨셉입니다.
+
+
 ## .net 프로젝트에 사용될 컨셉 (VS 2015)
 
 * [루씬 인덱싱/검색](https://github.com/psmon/psmonSearch/blob/master/psmonSearch/TestLib.cs)
 * [서버간 PUB/SUB 모델](https://github.com/psmon/TopicEventBus)
 * [기본 리모트 통신](https://github.com/psmon/AkkaNetTest)
+* 수집 크롤 엔진( API/웹문서/기타 리소스등을 유연하게 긁을수 있는,쉬운 배포에 중점을 둔 컨셉 준비중 )
 
 ## java 프로젝트에 사용될 컨셉
 
 * [WebSocket for Play25](https://github.com/psmon/psmonSearch/commit/8a885c1de1820192cb56c32cc34b41e18f03eefc#diff-911a0f2c3e264e6dd7b2e110349983d5)
 * [형태소 분석기-꼬꼬마 SocketTestTool](http://socktest.webnori.com/wstest)
+  -한글 Data ,1차 분해를 위한 역활로 WebSocket API화하여, 어느 플래폼이건 빠르게 사용 가능하게 해두었습니다. 
+
+## 설계에 참조할 컨셉및 소스
+
+https://github.com/petabridge/akkadotnet-code-samples/tree/master/Cluster.WebCrawler
+
 
 
 ## playWordParser 설정 (JAVA 1.8 IDEA Community)
