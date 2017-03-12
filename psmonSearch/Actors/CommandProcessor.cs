@@ -39,6 +39,13 @@ namespace psmonSearch.Actors
                     
                     CommandRouter.Ask<Routees>(new GetRoutees()).ContinueWith(tr =>
                     {
+                        string logtxt = string.Format("{0} has {1} routees: {2}", CommandRouter,
+                                tr.Result.Members.Count(),
+                                string.Join(",",
+                                    tr.Result.Members.Select(
+                                        y => y.ToString())));
+
+                        Console.WriteLine("=============>"+logtxt);
                         /*
                         var grrr =
                             new SignalRActor.DebugCluster(string.Format("{0} has {1} routees: {2}", CommandRouter,
