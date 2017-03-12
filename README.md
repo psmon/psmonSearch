@@ -21,7 +21,7 @@
 
 ## 공통 컨셉
 * Actor 모델 사용: 언랭에서 최초 고안된 모델로 마이크로 모델을 어디든 배포할수 있고, 클러스터 구성할수 있는 OOP설계에서 고려하기힘든  메시지 전송에 중점을 둔 개발컨셉이며 Java Akka/Akk.net/MS(Orleans) 등의 라이브러리로 활용가능
-* 제약조건 : Java/.net에서 동일 Actor Model사용시 이기종간 통신을 기대하였지만, Serializable,Byter Order등의 문제로 불가,해결책으로 WebSocket 인터페이스로 이기종 Actor를 연결시킴
+* 제약조건 : Java/.net에서 동일 Actor Model사용시 이기종간 통신을 기대하였지만,Actor는 같은기종 미들웨어 서버간 통신을 위해 고려된 모델이며 Serializable,Byter Order등의 문제로 불가,해결책으로 WebSocket 인터페이스로 이기종 Actor를 연결시킴, 이 방식은 미들웨어-사용자(브라우져)간 통신방식을 확장할때도 사용하는 방식임
 
 
 ## .net 프로젝트에 사용될 컨셉 (VS 2015)
