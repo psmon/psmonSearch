@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Akka;
+using Akka.Actor;
+using Akka.Event;
+using Akka.Configuration;
+
+using Akka.Serialization;
+
+namespace common.AkkaUtils
+{
+    // Akka System을 제어하는 유틸을 집합화합니다.
+    public class AkkaControler
+    {
+        Dictionary<string, ActorSystem> actorSystemList = new Dictionary<string, ActorSystem>();
+
+        public void SystemDown()
+        {            
+        }
+
+        public void StartAkkaSystem(string name, Config config)
+        {
+            if (actorSystemList.ContainsKey(name) == false)
+            {
+                ActorSystem system = ActorSystem.Create(name, config);
+                actorSystemList[name] = system;                
+            }
+        }
+        
+        public IActorRef CreateActor<TActor>(string systemName, string actorName) where TActor : ActorBase, new()
+        {
+            ActorSystem system = actorSystemList[systemName];
+            var actor = system.ActorOf<TActor>(actorName);
+            return actor;
+        }
+    }
+}

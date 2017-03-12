@@ -20,15 +20,18 @@
 이기종 통신: .net<->.java ( WebSocket)
 
 ## 공통 컨셉
-* Actor 모델 사용: 설계된 마이크로 모델을 어디든 배포할수 있고, 클러스터 구성할수 있다. OOP설계에서 고려하기힘든  메시지 전송에 중점을 둔 개발컨셉입니다.
+* Actor 모델 사용: 언랭에서 최초 고안된 모델로 마이크로 모델을 어디든 배포할수 있고, 클러스터 구성할수 있는 OOP설계에서 고려하기힘든  메시지 전송에 중점을 둔 개발컨셉이며 Java Akka/Akk.net/MS(Orleans) 등의 라이브러리로 활용가능
+* 제약조건 : Java/.net에서 동일 Actor Model사용시 이기종간 통신을 기대하였지만, Serializable,Byter Order등의 문제로 불가,해결책으로 WebSocket 인터페이스로 이기종 Actor를 연결시킴
 
 
 ## .net 프로젝트에 사용될 컨셉 (VS 2015)
 
 * [루씬 인덱싱/검색](https://github.com/psmon/psmonSearch/blob/master/psmonSearch/TestLib.cs)
-* [서버간 PUB/SUB 모델](https://github.com/psmon/TopicEventBus)
-* [기본 리모트 통신](https://github.com/psmon/AkkaNetTest)
-* 수집 크롤 엔진( API/웹문서/기타 리소스등을 유연하게 긁을수 있는,쉬운 배포에 중점을 둔 컨셉 준비중 )
+* [서버간 PUB/SUB 모델 사용](https://github.com/psmon/TopicEventBus)
+* [서비스간 리모트 통신 사용](https://github.com/psmon/AkkaNetTest)
+* [수집 크롤 엔진 작성]( https://github.com/psmon/psmonSearch/tree/master/common/Commands )
+* [for Micro Service Deploy](https://topshelf.readthedocs.io/en/latest/index.html)
+* [Html Parser](https://htmlagilitypack.codeplex.com/)
 
 ## java 프로젝트에 사용될 컨셉
 

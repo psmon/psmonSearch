@@ -39,8 +39,16 @@
       <HintPath>..\packages\Akka.Remote.1.1.3\lib\net45\Akka.Remote.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Akka.Streams, Version=1.1.3.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.Streams.1.1.3.32-beta\lib\net45\Akka.Streams.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Helios, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Helios.2.1.2\lib\net45\Helios.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Lucene.Net.Contrib.Analyzers, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
@@ -87,6 +95,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Reactive.Streams, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reactive.Streams.1.0.0-RC1\lib\portable-net45+netcore45\Reactive.Streams.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="Google.ProtocolBuffers">
       <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.dll</HintPath>
@@ -100,17 +112,40 @@
     <Reference Include="Akka.Cluster.Sharding">
       <HintPath>..\packages\Akka.Cluster.Sharding.1.0.6\lib\net45\Akka.Cluster.Sharding.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\IO\DownloadCommands.cs" />
+    <Compile Include="Actors\IO\DownloadCoordinator.cs" />
+    <Compile Include="Actors\IO\DownloadFlow.cs" />
+    <Compile Include="Actors\IO\HttpClientFactory.cs" />
+    <Compile Include="Actors\IO\ParseFlow.cs" />
     <Compile Include="Actors\SimpleActor.cs" />
+    <Compile Include="AkkaUtils\AkkaControler.cs" />
+    <Compile Include="Commands\WebCrawler\State\CompletedDocument.cs" />
+    <Compile Include="Commands\WebCrawler\State\CrawlDocument.cs" />
+    <Compile Include="Commands\WebCrawler\State\CrawlJob.cs" />
+    <Compile Include="Commands\WebCrawler\State\CrawlJobStats.cs" />
+    <Compile Include="Commands\WebCrawler\State\JobStatusMessage.cs" />
+    <Compile Include="Commands\WebCrawler\V1\JobInterfaces.cs" />
+    <Compile Include="Commands\WebCrawler\V1\JobStatusUpdate.cs" />
+    <Compile Include="Commands\WebCrawler\V1\StartJob.cs" />
+    <Compile Include="Commands\WebCrawler\V1\SubscribeToJob.cs" />
+    <Compile Include="Commands\WebCrawler\V1\UnsubscribeFromJob.cs" />
+    <Compile Include="Data\AttemptCrawl.cs" />
     <Compile Include="Data\DynamicDic.cs" />
+    <Compile Include="Data\IOMessages.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AkkaUtils\README.md" />
     <None Include="app.config" />
+    <None Include="Commands\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Commands\APICrawler\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

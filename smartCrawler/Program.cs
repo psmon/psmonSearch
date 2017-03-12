@@ -4,17 +4,16 @@ using System.Configuration;
 
 using common.Actors;
 
-namespace psmonSearch
+namespace smartCrawler
 {
-	class MainClass
-	{
-		public static void Main(string[] args)
-		{
-            TestLib.test1();
-
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            
             ConsoleKeyInfo cki;
             Console.CancelKeyPress += new ConsoleCancelEventHandler(myHandler);
-            var url = "http://+:80";
+
             var config = ConfigurationFactory.ParseString(@"
             akka {
                 actor {
@@ -28,32 +27,27 @@ namespace psmonSearch
                 }
                 remote {
                     helios.tcp {
-                        port = 8000
+                        port = 8001
                         hostname = localhost
                     }
                 }
             }
             ");
 
-            
-            //var url = ConfigurationManager.AppSettings.Get("ServiceURL");
-            AppService.StartWebService(url);
-            AppService.GetAkkaCtr().StartAkkaSystem("SearchMain", config);
-            AppService.GetAkkaCtr().CreateActor<SimpleActor>("SearchMain", "test");            
+            AppService.GetAkkaCtr().StartAkkaSystem("smartCrawler", config);
+            AppService.GetAkkaCtr().CreateActor<SimpleActor>("SearchMain", "test");
 
             while (true)
             {
                 cki = Console.ReadKey(true);
                 Console.WriteLine("  Key pressed: {0}\n", cki.Key);
+
                 byte[] test = new byte[6];
-                test[0] = 1;                
+                test[0] = 1;
+                
                 if (cki.Key == ConsoleKey.X) break;
             }
-
-            AppService.SystemDown();
-
-
-		}
+        }
 
         protected static void myHandler(object sender, ConsoleCancelEventArgs args)
         {
