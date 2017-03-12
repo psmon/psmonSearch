@@ -3,6 +3,7 @@ using Akka.Configuration;
 using System.Configuration;
 
 using common.Actors;
+using common.Data;
 
 namespace psmonSearch
 {
@@ -15,39 +16,31 @@ namespace psmonSearch
             ConsoleKeyInfo cki;
             Console.CancelKeyPress += new ConsoleCancelEventHandler(myHandler);
             var url = "http://+:80";
-            var config = ConfigurationFactory.ParseString(@"
-            akka {
-                actor {
-                    provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
-                    serializers {
-                          wire = ""Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion""
-                    }
-                    serialization-bindings {
-                    ""System.Object"" = wire
-                    }
-                }
-                remote {
-                    helios.tcp {
-                        port = 8000
-                        hostname = localhost
-                    }
-                }
-            }
-            ");
 
-            
-            //var url = ConfigurationManager.AppSettings.Get("ServiceURL");
-            AppService.StartWebService(url);
-            AppService.GetAkkaCtr().StartAkkaSystem("SearchMain", config);
-            AppService.GetAkkaCtr().CreateActor<SimpleActor>("SearchMain", "test");            
+            AppService.Start(url);
 
             while (true)
             {
-                cki = Console.ReadKey(true);
-                Console.WriteLine("  Key pressed: {0}\n", cki.Key);
+                string readCommand;
+                readCommand = Console.ReadLine();
+
+
+                //Console.WriteLine("  Key pressed: {0}\n", cki.Key);
                 byte[] test = new byte[6];
-                test[0] = 1;                
-                if (cki.Key == ConsoleKey.X) break;
+                test[0] = 1;
+
+                var system = AppService.GetAkkaCtr().GetSystem("webcrawler");
+
+                if(readCommand.Substring(0,4) == "http")
+                {
+                    system.ActorSelection("user/commands").Tell(new AttemptWebCrawl(readCommand));
+                }
+                
+
+                if (readCommand == "exit")
+                    break;
+
+                //if (cki.Key == ConsoleKey.X) break;
             }
 
             AppService.SystemDown();

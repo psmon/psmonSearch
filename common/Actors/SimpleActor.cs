@@ -16,7 +16,12 @@ namespace common.Actors
         public SimpleActor()
         {
             Receive<byte[]>(message => {
-                Log.Error("Received String message: {0}", message);
+                Log.Debug("Received String message: {0}", message);
+                //Sender.Tell("re:" + message);
+            });
+
+            Receive<string[]>(message => {
+                Log.Debug("Received String message: {0}", message);
                 //Sender.Tell("re:" + message);
             });
 

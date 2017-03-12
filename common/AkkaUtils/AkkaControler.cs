@@ -21,13 +21,21 @@ namespace common.AkkaUtils
         {            
         }
 
-        public void StartAkkaSystem(string name, Config config)
+        public ActorSystem StartAkkaSystem(string name, Config config)
         {
+            ActorSystem result = null;            
             if (actorSystemList.ContainsKey(name) == false)
             {
                 ActorSystem system = ActorSystem.Create(name, config);
-                actorSystemList[name] = system;                
+                actorSystemList[name] = system;
+                result =  system;
             }
+            return result;
+        }
+
+        public ActorSystem GetSystem(string name)
+        {
+            return actorSystemList[name];
         }
         
         public IActorRef CreateActor<TActor>(string systemName, string actorName) where TActor : ActorBase, new()

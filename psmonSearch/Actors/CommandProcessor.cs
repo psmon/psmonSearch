@@ -10,7 +10,7 @@ using common.Data;
 using common.Commands.WebCrawler.V1;
 using common.Commands.WebCrawler.State;
 
-namespace smartCrawler.Actors
+namespace psmonSearch.Actors
 {
     public interface ICommandProcessor
     {
@@ -35,9 +35,11 @@ namespace smartCrawler.Actors
                 {
                     var startJob = new StartJob(new CrawlJob(new Uri(attempt.RawStr, UriKind.Absolute), true), Sender);
                     CommandRouter.Tell(startJob);
-                    /*  Todo: 작업상황 모든 라우터에게 실시간으로 알려주기...
+                    
+                    
                     CommandRouter.Ask<Routees>(new GetRoutees()).ContinueWith(tr =>
                     {
+                        /*
                         var grrr =
                             new SignalRActor.DebugCluster(string.Format("{0} has {1} routees: {2}", CommandRouter,
                                 tr.Result.Members.Count(),
@@ -46,7 +48,8 @@ namespace smartCrawler.Actors
                                         y => y.ToString()))));
 
                         return grrr;
-                    }).PipeTo(Sender);*/
+                        */
+                    }).PipeTo(Sender);
                     Sender.Tell(startJob);
                 }
                 else

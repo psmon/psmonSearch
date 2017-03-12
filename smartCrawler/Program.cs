@@ -14,28 +14,7 @@ namespace smartCrawler
             ConsoleKeyInfo cki;
             Console.CancelKeyPress += new ConsoleCancelEventHandler(myHandler);
 
-            var config = ConfigurationFactory.ParseString(@"
-            akka {
-                actor {
-                    provider = ""Akka.Remote.RemoteActorRefProvider, Akka.Remote""
-                    serializers {
-                          wire = ""Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion""
-                    }
-                    serialization-bindings {
-                    ""System.Object"" = wire
-                    }
-                }
-                remote {
-                    helios.tcp {
-                        port = 8001
-                        hostname = localhost
-                    }
-                }
-            }
-            ");
-
-            AppService.GetAkkaCtr().StartAkkaSystem("smartCrawler", config);
-            AppService.GetAkkaCtr().CreateActor<SimpleActor>("SearchMain", "test");
+            AppService.Start();
 
             while (true)
             {

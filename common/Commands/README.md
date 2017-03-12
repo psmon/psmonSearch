@@ -4,12 +4,14 @@
 
 ## WebCrawler
 
-
+-WebCrawl Data Flow
 ![WebCrawl Data Flow](https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/cluster-webcrawl-data-flow.png)
 
-
+-service_hierarchy
 ![crawl_service_hierarchy](https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/crawl_service_hierarchy.png)
 
+-crawler-microservices
+![crawler-microservices](https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/crawler-microservices.png)
 
 ### CrawlJob
 
