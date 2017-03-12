@@ -4,11 +4,11 @@
 
 ## WebCrawler
 
-* Simple Craler Service
-!(https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/cluster-webcrawl-data-flow.png)
 
-* Crawler Role
-!(https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/crawl_service_hierarchy.png)
+![WebCrawl Data Flow](https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/cluster-webcrawl-data-flow.png)
+
+
+![crawl_service_hierarchy](https://github.com/petabridge/akkadotnet-code-samples/raw/master/Cluster.WebCrawler/diagrams/crawl_service_hierarchy.png)
 
 
 ### CrawlJob
