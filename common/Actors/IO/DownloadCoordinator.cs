@@ -194,7 +194,7 @@ namespace common.Actors.IO
             {
                 _logger.Info("Logging completed download {0} bytes {1}", completed.Document.DocumentUri, completed.NumBytes);
                 Stats = Stats.WithCompleted(completed);
-                _logger.Info("Total stats {0}", Stats);
+                _logger.Info("Total stats {0}", Stats);                
             });
 
             Receive<StreamCompleteTick>(_ =>

@@ -21,6 +21,8 @@ using smartCrawler.Actors.Tracking;
 using common.Commands.WebCrawler.V1;
 using common.Commands.WebCrawler.State;
 
+using HtmlAgilityPack;
+
 namespace smartCrawler
 {
     public static class AppService
@@ -29,8 +31,31 @@ namespace smartCrawler
         static IActorRef ApiMaster;
         static IActorRef DownloadMaster;
 
-        public static void Start()
+        public static void Test()
         {
+            var htmlString = "<meta property='og:title' content='test'>";
+            var doc = new HtmlDocument();
+            doc.LoadHtml(htmlString);
+            var titleNode = doc.DocumentNode.SelectNodes("//meta[@property='og:title']");
+            var descripttionNode = doc.DocumentNode.SelectNodes("//meta[@property='og:description']");
+            var postListNode = doc.DocumentNode.SelectNodes("//div[@id='postListBody']//p");
+            var postListNode2 = doc.DocumentNode.SelectNodes("//div[@id='postListBody']//span");
+
+            if (titleNode != null)
+            {
+                
+                foreach(HtmlNode html in titleNode)
+                {
+                    string str = html.Attributes["content"].Value;
+                    int a = 99;
+
+                }
+
+            }
+        }
+
+        public static void Start()
+        {           
             var config2 = ConfigurationFactory.ParseString(@"
                 akka {
                   actor {

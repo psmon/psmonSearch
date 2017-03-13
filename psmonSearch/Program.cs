@@ -31,12 +31,15 @@ namespace psmonSearch
 
                 var system = AppService.GetAkkaCtr().GetSystem("webcrawler");
 
-                if(readCommand.Substring(0,4) == "http")
+                if (readCommand.Length > 10)
                 {
-                    system.ActorSelection("user/commands").Tell(new AttemptWebCrawl(readCommand));
+                    if (readCommand.Substring(0, 4) == "http")
+                    {
+                        system.ActorSelection("user/commands").Tell(new AttemptWebCrawl(readCommand));
+                    }
                 }
                 
-
+                
                 if (readCommand == "exit")
                     break;
 
