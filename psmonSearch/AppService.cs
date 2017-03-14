@@ -52,6 +52,7 @@ namespace psmonSearch
 									}
 								}                
 							}
+
 						}
                         remote {
 							log-remote-lifecycle-events = DEBUG

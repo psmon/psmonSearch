@@ -13,6 +13,8 @@ namespace common.Actors.IO
     //네이버 블로그 ParserFlow
     public static class ParseFlow
     {
+        public static IActorRef publisher;
+
         public static Flow<DownloadHtmlResult, CheckDocuments, NotUsed> GetParseFlow(CrawlJob jobRoot)
         {
             return Flow.Create<DownloadHtmlResult>().Async()
@@ -70,9 +72,11 @@ namespace common.Actors.IO
                             }                            
                         }
 
-                        if (title != null && (Content2.Length>5 || Content2.Length>5) )
+                        if (title != null && (Content1.Length>5 || Content2.Length>5) )
                         {
                             //Todo : 수집 컨텐츠. 스토어하기
+                            BlogDocuments blogdoc = new BlogDocuments(title,Content1+Content2);
+                            publisher.Tell(blogdoc, ActorRefs.NoSender);
                         }
                     }
 
@@ -104,6 +108,7 @@ namespace common.Actors.IO
                         requestedUrls = requestedUrls.Concat(validImgUris).ToList();*/
                     }
 
+                    
                     /* PROCESS ALL LINKS */
                     if (links != null)
                     {

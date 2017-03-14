@@ -15,6 +15,9 @@ namespace common.AkkaUtils
     // Akka System을 제어하는 유틸을 집합화합니다.
     public class AkkaControler
     {
+        //public static string LastUsedName;
+        public static ActorSystem LastActorSystem;
+
         Dictionary<string, ActorSystem> actorSystemList = new Dictionary<string, ActorSystem>();
 
         public void SystemDown()
@@ -26,7 +29,9 @@ namespace common.AkkaUtils
             ActorSystem result = null;            
             if (actorSystemList.ContainsKey(name) == false)
             {
+                
                 ActorSystem system = ActorSystem.Create(name, config);
+                LastActorSystem = system;
                 actorSystemList[name] = system;
                 result =  system;
             }

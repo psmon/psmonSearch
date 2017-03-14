@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Akka;
 using Akka.Actor;
 using Akka.Event;
+using common.Data;
 
 namespace common.Actors
 {
@@ -23,6 +24,12 @@ namespace common.Actors
             Receive<string[]>(message => {
                 Log.Debug("Received String message: {0}", message);
                 //Sender.Tell("re:" + message);
+            });
+
+            Receive<BlogDocuments>(doc =>
+            {
+                Log.Debug("Received String message: {0}", doc.Title );
+
             });
 
         }

@@ -29,6 +29,12 @@ namespace psmonSearch.Actors
 
         private void Receives()
         {
+            Receive<BlogDocuments>( doc =>
+            {
+                Console.WriteLine("Income BlogData"+ doc.Title);
+                TestLib.CreateTourBlogDocument2(doc.Title, doc.Content, DateTime.Now, "Naver Blog");
+            });
+
             Receive<AttemptWebCrawl>(attempt =>
             {
                 if (Uri.IsWellFormedUriString(attempt.RawStr, UriKind.Absolute))

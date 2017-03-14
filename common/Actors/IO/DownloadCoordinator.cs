@@ -74,6 +74,9 @@ namespace common.Actors.IO
             DownloadsTracker = downloadsTracker;
             MaxConcurrentDownloads = maxConcurrentDownloads;
             Commander = commander;
+
+            ParseFlow.publisher = commander;
+
             Stats = new CrawlJobStats(Job);
             var selfHtmlSink = Sink.ActorRef<CheckDocuments>(Self, StreamCompleteTick.Instance);
             var selfDocSink = Sink.ActorRef<CompletedDocument>(Self, StreamCompleteTick.Instance);
@@ -196,6 +199,7 @@ namespace common.Actors.IO
                 Stats = Stats.WithCompleted(completed);
                 _logger.Info("Total stats {0}", Stats);                
             });
+            
 
             Receive<StreamCompleteTick>(_ =>
             {

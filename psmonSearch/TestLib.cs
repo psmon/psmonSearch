@@ -96,8 +96,35 @@ namespace psmonSearch
             doc.Add(new Field("extData", title, Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             doc.Add(new Field("contents", title + " " + htmlcontent, Field.Store.YES, Field.Index.ANALYZED));
+
+            writer.AddDocument(doc);
             return doc;
         }
+
+        public static String Search(string keyword)
+        {
+            string result="";
+            Searcher searcher = new IndexSearcher(indexReader);
+            Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+            var parser = new QueryParser(Version.LUCENE_30, "contents", analyzer);
+            Query query = parser.Parse( keyword );
+            Console.WriteLine(string.Format("Query:{0}", query));
+            TopDocs topdocs = searcher.Search(query, null, 100);
+            Collector streamingHitCollector = new AnonymousClassCollector();
+            searcher.Search(query, streamingHitCollector);
+
+            foreach (ScoreDoc scoreDoc in topdocs.ScoreDocs)
+            {
+                if (scoreDoc.Score > 0.1f)
+                {
+                    Document doc = searcher.Doc(scoreDoc.Doc);
+                    Console.WriteLine(string.Format("DocTitle:{0} DocContent:{1}  HitCount:{2}", doc.Get("title"), doc.Get("contents"), scoreDoc.Score));
+                }
+            }
+            return result;
+        }
+
+
 
         public static void DoStreamingSearch(Searcher searcher, Query query)
         {
@@ -106,7 +133,9 @@ namespace psmonSearch
         }
 
 
-        
+        public static IndexWriter writer;
+        public static IndexReader indexReader;
+
         public static void test1()
         {
             try
@@ -117,45 +146,45 @@ namespace psmonSearch
                 SimpleFSDirectory fsDir = new SimpleFSDirectory(INDEX_DIR, null);
 
                 bool isNewCreate = false;
-                using (var writer = new IndexWriter(fsDir, new StandardAnalyzer(Version.LUCENE_30), isNewCreate, IndexWriter.MaxFieldLength.LIMITED))
-                {                    
-                    Console.Out.WriteLine("Indexing to directory '" + INDEX_DIR + "'...");
-                    CreateTourBlogDocument(writer,"파리 여행","에펠탑 ",DateTime.Now);                    
-                    CreateTourBlogDocument(writer, "서울 여행", "남대문 시장 한국", DateTime.Now);
-                    CreateTourBlogDocument(writer, "서울 여행2", "남대문 시장 한국", DateTime.Now);                    
-                    CreateTourBlogDocument(writer, "유럽 여행", "파리 에펠탑", DateTime.Now);                    
-                    CreateTourBlogDocument(writer, "유럽 여행", "스페인 에서 파리 에펠탑 투어", DateTime.Now);                    
-                    writer.Optimize();
-                    writer.Commit();
+                writer = new IndexWriter(fsDir, new StandardAnalyzer(Version.LUCENE_30), isNewCreate, IndexWriter.MaxFieldLength.LIMITED);
 
-                    IndexReader indexReader = null;
-                    indexReader = IndexReader.Open(fsDir, true); // only searching, so read-only=true
-                    Searcher searcher = new IndexSearcher(indexReader);
-                    Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
-                    var parser = new QueryParser(Version.LUCENE_30, "contents", analyzer);
+                Console.Out.WriteLine("Indexing to directory '" + INDEX_DIR + "'...");
+                CreateTourBlogDocument(writer, "파리 여행", "에펠탑 ", DateTime.Now);
+                CreateTourBlogDocument(writer, "서울 여행", "남대문 시장 한국", DateTime.Now);
+                CreateTourBlogDocument(writer, "서울 여행2", "남대문 시장 한국", DateTime.Now);
+                CreateTourBlogDocument(writer, "유럽 여행", "파리 에펠탑", DateTime.Now);
+                CreateTourBlogDocument(writer, "유럽 여행", "스페인 에서 파리 에펠탑 투어", DateTime.Now);
+                writer.Optimize();
+                writer.Commit();
 
-                    Query query = parser.Parse("한국");
-                    Console.WriteLine(string.Format("Query:{0}", query));
-                    TopDocs topdocs = searcher.Search(query, null, 100);
+                indexReader = null;
+                indexReader = IndexReader.Open(fsDir, true); // only searching, so read-only=true
+                Searcher searcher = new IndexSearcher(indexReader);
+                Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+                var parser = new QueryParser(Version.LUCENE_30, "contents", analyzer);
 
-                    Collector streamingHitCollector = new AnonymousClassCollector();
-                    searcher.Search(query, streamingHitCollector);
+                Query query = parser.Parse("한국");
+                Console.WriteLine(string.Format("Query:{0}", query));
+                TopDocs topdocs = searcher.Search(query, null, 100);
 
-                    foreach (ScoreDoc scoreDoc in topdocs.ScoreDocs)
+                Collector streamingHitCollector = new AnonymousClassCollector();
+                searcher.Search(query, streamingHitCollector);
+
+                foreach (ScoreDoc scoreDoc in topdocs.ScoreDocs)
+                {
+                    if (scoreDoc.Score > 0.1f)
                     {
-                        if (scoreDoc.Score > 0.1f)
-                        {
-                            Document doc = searcher.Doc(scoreDoc.Doc);
-                            Console.WriteLine(string.Format("DocTitle:{0} DocContent:{1}  HitCount:{2}", doc.Get("title"), doc.Get("contents"), scoreDoc.Score));
-                        }
+                        Document doc = searcher.Doc(scoreDoc.Doc);
+                        Console.WriteLine(string.Format("DocTitle:{0} DocContent:{1}  HitCount:{2}", doc.Get("title"), doc.Get("contents"), scoreDoc.Score));
                     }
+                }
 
-                    if (indexReader != null)
-                    {
-                        indexReader.Dispose();
-                        fsDir.Dispose();
-                    }
-                }                                
+                if (indexReader != null)
+                {
+                    //indexReader.Dispose();
+                    //fsDir.Dispose();
+                }
+
             }
             catch(IOException e)
             {

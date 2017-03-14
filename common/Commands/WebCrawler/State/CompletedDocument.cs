@@ -12,10 +12,11 @@ namespace common.Commands.WebCrawler.State
             CompletedBy = completedBy;
             NumBytes = numBytes;
             Document = document;
+           
         }
 
         public CrawlDocument Document { get; private set; }
-
+        
         public int NumBytes { get; private set; }
 
         public IActorRef CompletedBy { get; private set; }

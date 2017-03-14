@@ -23,19 +23,29 @@ namespace psmonSearch
             {
                 string readCommand;
                 readCommand = Console.ReadLine();
-
-
-                //Console.WriteLine("  Key pressed: {0}\n", cki.Key);
-                byte[] test = new byte[6];
-                test[0] = 1;
-
+                
                 var system = AppService.GetAkkaCtr().GetSystem("webcrawler");
 
-                if (readCommand.Length > 10)
+                string[] conargs = readCommand.Split('^');
+
+                if (conargs.Length > 1)
                 {
-                    if (readCommand.Substring(0, 4) == "http")
+                    string command = conargs[0];
+                    string reqData1 = conargs[1];
+                    switch (command)
                     {
-                        system.ActorSelection("user/commands").Tell(new AttemptWebCrawl(readCommand));
+                        case "get":
+                            if (reqData1.Length > 10)
+                            {
+                                if (reqData1.Substring(0, 4) == "http")
+                                {
+                                    system.ActorSelection("user/commands").Tell(new AttemptWebCrawl(reqData1));
+                                }
+                            }
+                            break;
+                        case "search":
+                            Console.WriteLine(TestLib.Search(reqData1)) ;
+                            break;
                     }
                 }
                 

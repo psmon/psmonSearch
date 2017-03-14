@@ -14,6 +14,7 @@ using common.Commands.WebCrawler.State;
 using smartCrawler.Actors;
 using smartCrawler.Actors.Tracking;
 
+using common.AkkaUtils;
 
 namespace smartCrawler.Actors
 {
@@ -198,6 +199,14 @@ namespace smartCrawler.Actors
                 PublishJobStatus();
             });
 
+            Receive<BlogDocuments>(doc =>
+            {
+                PublishData(doc);
+                ActorSelection mainActor = AkkaControler.LastActorSystem.ActorSelection("akka.tcp://webcrawler@127.0.0.1:4053/user/commands");
+                mainActor.Tell(doc);                
+                
+            });
+
             Receive<StopJob>(stop => EndJob(JobStatus.Stopped));
 
             //job is finished
@@ -218,5 +227,14 @@ namespace smartCrawler.Actors
             foreach (var sub in Subscribers)
                 sub.Tell(RunningStatus);
         }
+
+        private void PublishData(object data)
+        {
+            foreach (var sub in Subscribers)
+                sub.Tell(data);
+
+
+        }
+
     }
 }

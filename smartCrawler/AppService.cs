@@ -79,7 +79,7 @@ namespace smartCrawler
                       #will be populated with a dynamic host-name at runtime if left uncommented
                       #public-hostname = ""POPULATE STATIC IP HERE""
                       hostname = ""127.0.0.1""
-                      port = 5001
+                      port = 5000
                       maximum-frame-size = 256000b
                     }
                   }            
@@ -101,7 +101,7 @@ namespace smartCrawler
                         serialization-bindings {
                         ""System.Object"" = wire
                         }
-		            deployment {
+		            deployment {                        
 			            /api/broadcaster {
 				            router = broadcast-group
 				            routees.paths = [""/user/api""]
@@ -143,7 +143,7 @@ namespace smartCrawler
 			            #will be populated with a dynamic host-name at runtime if left uncommented
 			            #public-hostname = ""POPULATE STATIC IP HERE""
 			            hostname = ""127.0.0.1""
-			            port = 5002
+			            port = 5001
                         maximum-frame-size = 256000b
 		            }
 	            }            

@@ -56,6 +56,19 @@ namespace common.Data
         /// Reference to the actor who should take on the cleared documents
         /// </summary>
         public IActorRef Assigned { get; private set; }
-    }    
+    }
+
+    public class BlogDocuments
+    {
+        public BlogDocuments(string title, string content)
+        {
+            Title = title;
+            Content = content;
+        }
+
+        public string Title{ get; set; }
+        public string Content { get; set; }
+
+    }
 
 }
