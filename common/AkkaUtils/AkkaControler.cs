@@ -29,8 +29,12 @@ namespace common.AkkaUtils
             ActorSystem result = null;            
             if (actorSystemList.ContainsKey(name) == false)
             {
-                
-                ActorSystem system = ActorSystem.Create(name, config);
+                ActorSystem system;
+                if(config==null)
+                    system = ActorSystem.Create(name);
+                else
+                    system = ActorSystem.Create(name,config);
+
                 LastActorSystem = system;
                 actorSystemList[name] = system;
                 result =  system;
