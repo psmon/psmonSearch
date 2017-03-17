@@ -108,8 +108,9 @@ namespace common.Actors.IO
                         requestedUrls = requestedUrls.Concat(validImgUris).ToList();*/
                     }
 
-                    
+
                     /* PROCESS ALL LINKS */
+                    links = null;   //대량의 다운로드 방지를 위해, 관련 링크 다운로드방지,대량 수집을 하려면 코멘트 하세요..
                     if (links != null)
                     {
                         var validLinkUris =

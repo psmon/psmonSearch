@@ -23,7 +23,6 @@ using common.Commands.WebCrawler.State;
 
 using HtmlAgilityPack;
 
-using System.Configuration;
 using Akka.Configuration;
 using Akka.Configuration.Hocon;
 using ConfigurationException = Akka.Configuration.ConfigurationException;

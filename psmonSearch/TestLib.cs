@@ -22,6 +22,7 @@ using Lucene.Net.Support;
 using Lucene.Net.Index;
 using FSDirectory = Lucene.Net.Store.FSDirectory;
 using Version = Lucene.Net.Util.Version;
+using common.Data;
 
 namespace psmonSearch
 {
@@ -69,9 +70,6 @@ namespace psmonSearch
             }
         }
 
-
-
-
         public static Document CreateTourBlogDocument(IndexWriter writer, string title,string htmlcontent,DateTime lastWriteTime)
         {
             // title => 나라명,도시명
@@ -113,18 +111,25 @@ namespace psmonSearch
             Collector streamingHitCollector = new AnonymousClassCollector();
             searcher.Search(query, streamingHitCollector);
 
+            StringBuilder text = new StringBuilder();
+
+            int limitCnt = 10;
             foreach (ScoreDoc scoreDoc in topdocs.ScoreDocs)
             {
+                limitCnt--; if (limitCnt < 0) break;
                 if (scoreDoc.Score > 0.1f)
                 {
                     Document doc = searcher.Doc(scoreDoc.Doc);
-                    Console.WriteLine(string.Format("DocTitle:{0} DocContent:{1}  HitCount:{2}", doc.Get("title"), doc.Get("contents"), scoreDoc.Score));
+
+                    string rowData = string.Format("DocTitle:{0} DocContent:{1}  HitCount:{2}", doc.Get("title"), doc.Get("contents"), scoreDoc.Score);
+                    Console.WriteLine(rowData);
+                    
+                    text.Append(rowData);
                 }
             }
+            result = text.ToString();
             return result;
         }
-
-
 
         public static void DoStreamingSearch(Searcher searcher, Query query)
         {
@@ -132,8 +137,8 @@ namespace psmonSearch
             searcher.Search(query, streamingHitCollector);
         }
 
-
         public static IndexWriter writer;
+
         public static IndexReader indexReader;
 
         public static void test1()
@@ -145,7 +150,7 @@ namespace psmonSearch
 
                 SimpleFSDirectory fsDir = new SimpleFSDirectory(INDEX_DIR, null);
 
-                bool isNewCreate = false;
+                bool isNewCreate = true;    //이전 파일을 초기화함...
                 writer = new IndexWriter(fsDir, new StandardAnalyzer(Version.LUCENE_30), isNewCreate, IndexWriter.MaxFieldLength.LIMITED);
 
                 Console.Out.WriteLine("Indexing to directory '" + INDEX_DIR + "'...");
@@ -190,6 +195,38 @@ namespace psmonSearch
             {
                 Console.Out.WriteLine(" caught a " + e.GetType() + "\n with message: " + e.Message);
             }            
+        }
+
+        public static string TestCommand(string readCommand)
+        {
+            var system = AppService.GetAkkaCtr().GetSystem("webcrawler");
+
+            string[] conargs = readCommand.Split('^');
+
+            if (conargs.Length > 1)
+            {
+                string command = conargs[0];
+                string reqData1 = conargs[1];
+                switch (command)
+                {
+                    case "get":
+                        if (reqData1.Length > 10)
+                        {
+                            if (reqData1.Substring(0, 4) == "http")
+                            {
+                                system.ActorSelection("user/commands").Tell(new AttemptWebCrawl(reqData1));
+                                return reqData1 + "수집 시작..";
+                            }
+                        }
+                        break;
+                    case "search":
+                        return TestLib.Search(reqData1);
+                        
+                }
+            }
+
+            return "help: search^검색대상 , get^웹페이지 ";
+
         }
         
     }

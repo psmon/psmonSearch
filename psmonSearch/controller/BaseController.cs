@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Nancy;
-
 using Newtonsoft.Json;
-
 using System.Configuration;
-
 using common.Data;
 using System.Dynamic;
+using Newtonsoft.Json.Linq;
 #pragma warning disable 1998
 
 namespace psmonSearch.controller
@@ -47,11 +45,13 @@ namespace psmonSearch.controller
             return dataStr;
         }
 
-        public IDictionary<string, object> GetPayLoad()
+        public Dictionary<string, object> GetPayLoad()
         {
-            var postData = JsonConvert.DeserializeObject(GetBodyString());            
-            IDictionary<string, object> payload = (IDictionary<string, object>)postData;
-            return payload;
+            JObject jsonObj = JObject.Parse(GetBodyString());
+            
+            Dictionary<string, object> dictObj = jsonObj.ToObject<Dictionary<string, object>>();
+
+            return dictObj;
         }
 
         public string GetUserIP()
