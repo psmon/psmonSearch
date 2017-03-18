@@ -75,6 +75,22 @@ PlayFramework 는, FullStack-[Spec확인](https://www.playframework.com/document
    - Edit Configuration
    - + 버튼 , Add SBT Task , Tasks: run 입력
    - 실행및 디버깅 확인
+   
+### 기본 개념
+
+## 한국어 형태소 분석
+한글 형태소의 품사를 '체언, 용언, 관형사, 부사, 감탄사, 조사, 어미, 접사, 어근, 부호, 한글 이외'와 같이 나누고 각 세부 품사를 구분한다.
+
+http://kkma.snu.ac.kr/documents/index.jsp?doc=postag
+
+## Ngram
+N-gram이란?
+N-gram은 텍스트나 문서에서 추출한 문자 또는 단어의 시퀀스이며, 문자 기반 및 단어 기반이라는 두 그룹으로 분류할 수 있다. 
+N-gram은 단어 또는 문자열(이 튜토리얼의 경우)에서 추출한 N개의 연속 문자 세트이다. 이 방법의 배후에는 비슷한 단어가 
+N-gram의 높은 비율을 차지할 것이라는 개념이 깔려있다. 가장 일반적으로 사용되는 N값은 2와 3이며, 각각의 경우를 bigram과 trigram이라고 한다. 
+예를 들어, TIKA라는 단어에서는 T, TI, IK, KA, A*라는 bigram과 **T, *TI, TIK, IKA, KA, A*라는 trigram이 생성된다. ""는 채우기 공간을 의미한다. 
+문자 기반 N-gram은 문자열으 유사성을 측정하는데 사용된다. 문자 기반 N-gram을 사용하는 애플리케이션으로는 맞춤법 검사기 스테밍(strmming), OCR등이 있다.
+발췌 :  http://www.ibm.com/developerworks/kr/opensource/tutorials/os-apache-tika/section6.html
 
 
 
