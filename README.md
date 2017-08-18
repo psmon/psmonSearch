@@ -36,7 +36,7 @@
 ## java 프로젝트에 사용될 컨셉
 
 * [WebSocket for Play25](https://github.com/psmon/psmonSearch/commit/8a885c1de1820192cb56c32cc34b41e18f03eefc#diff-911a0f2c3e264e6dd7b2e110349983d5)
-* [형태소 분석기-꼬꼬마 SocketTestTool](http://socktest.webnori.com/wstest)
+* [형태소 분석기-꼬꼬마 SocketTestTool](http://psmon.iptime.org:9000/wstest)
   -한글 Data ,1차 분해를 위한 역활로 WebSocket API화하여, 어느 플래폼이건 빠르게 사용 가능하게 해두었습니다. 
 
 ## 설계에 참조할 컨셉및 소스
